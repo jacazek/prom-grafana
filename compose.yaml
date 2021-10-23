@@ -1,0 +1,17 @@
+version: "3.9"  # optional since v1.27.0
+services:
+  grafana:
+    image: grafana/grafana
+    ports:
+      - "3000:3000"
+    user: "$CURRENT_ID"
+    links:
+      - prometheus
+    volumes:
+      - "$PWD/data:/var/lib/grafana"
+      - "$PWD/provisioning:/etc/grafana/provisioning"
+
+  prometheus:
+    image: prom/prometheus
+    ports:
+      - "9090:9090"
